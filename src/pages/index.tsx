@@ -3,15 +3,33 @@ import styles from './index.less';
 import 'react-quill/dist/quill.snow.css';
 import './fixed.css';
 
-import { Layout, Menu, Form, Input, Button, Checkbox } from 'antd';
+import {
+  Layout,
+  Menu,
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  List,
+  Typography,
+} from 'antd';
+
 import {
   UserOutlined,
   UploadOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
-import ReactQuill from 'react-quill';
 
-const { Content, Footer, Sider } = Layout;
+import ReactQuill from 'react-quill';
+import {
+  DragDropContext,
+  Droppable,
+  DroppableStateSnapshot,
+  DroppableProvided,
+  Draggable,
+} from 'react-beautiful-dnd';
+
+const { Content, Sider } = Layout;
 
 class BaseForm extends React.Component {
   render() {
@@ -128,9 +146,72 @@ class ListTrace extends React.Component {
       return arr;
     },
   };
+
+  onBeforeCapture = () => {
+    /*...*/
+  };
+
+  onBeforeDragStart = () => {
+    /*...*/
+  };
+
+  onDragStart = () => {
+    /*...*/
+  };
+  onDragUpdate = () => {
+    /*...*/
+  };
+  onDragEnd = () => {
+    // the only one that is required
+  };
+
   render() {
     const { listData } = this.state;
-    return <></>;
+    return (
+      <DragDropContext
+        onBeforeCapture={this.onBeforeCapture}
+        onBeforeDragStart={this.onBeforeDragStart}
+        onDragStart={this.onDragStart}
+        onDragUpdate={this.onDragUpdate}
+        onDragEnd={this.onDragEnd}
+      >
+        <Droppable droppableId="list">
+          {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
+            <div
+              ref={provided.innerRef}
+              style={{
+                backgroundColor: 'lightblue',
+              }}
+              {...provided.droppableProps}
+            >
+              <List
+                header={<div>Header</div>}
+                footer={<div>Footer</div>}
+                bordered
+                dataSource={listData()}
+                renderItem={(item, index) => (
+                  <Draggable draggableId={index.toString()} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <List.Item>
+                          <Typography.Text mark>项</Typography.Text>{' '}
+                          {item.title}
+                        </List.Item>
+                      </div>
+                    )}
+                  </Draggable>
+                )}
+              />
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    );
   }
 }
 
@@ -193,9 +274,6 @@ class App extends React.Component {
                   onChange={this.handleChange}
                 />
               </Content>
-              <Footer style={{ textAlign: 'center' }}>
-                Ant Design ©2018 Created by Ant UED
-              </Footer>
             </Layout>
           </Layout>
         </div>
