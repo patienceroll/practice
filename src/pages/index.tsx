@@ -17,10 +17,7 @@ const { Content, Footer, Sider } = Layout;
 
 class BaseForm extends React.Component {
 
-
-
   render() {
-
     const layout = {
       labelCol: { span: 8 },
       wrapperCol: { span: 16 },
@@ -44,17 +41,22 @@ class BaseForm extends React.Component {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       layout='horizontal'
-      // colon={false}
-      validateMessages={{ required: "用户名不能为空" }}
+    // colon={false}
+    // validateMessages={{ required: "用户名不能为空" }}
     >
       <Form.Item
         label="用户名"
         name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
-      // labelCol={{span:5,offset:0}}
-      // extra="用户名不能为空"
-      // help="这是帮助信息"
-      normalize={(value, prevValue, prevValues) => console.log(value,prevValue,prevValues)}
+        rules={[
+          { required: true, message: '请输入用户名' },
+          { min: 3, message: '长度须大于3' },
+          { max: 10, message: '长度须小于10' },
+          // { whitespace: true, message:'请输入用户名'}
+        ]}
+        // labelCol={{span:5,offset:0}}
+        // extra="用户名不能为空"
+        // help="这是帮助信息"
+        normalize={(value, prevValue, prevValues) => { console.log(value); return value.toString() }}
       >
         <Input />
       </Form.Item>
@@ -63,9 +65,24 @@ class BaseForm extends React.Component {
         // labelAlign="left"
         label="密码"
         name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[
+          { required: true, message: '请输入密码' },
+          { min: 3, message: '长度须大于6' },
+          { max: 10, message: '长度须小于16' },
+        ]}
+
       >
         <Input.Password />
+      </Form.Item>
+
+      <Form.Item
+        // labelAlign="left"
+        label="邮箱"
+        name="email"
+        rules={[{ pattern: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/, message: '邮箱不匹配' }]}
+
+      >
+        <Input />
       </Form.Item>
 
       <Form.Item {...tailLayout} name="remember" valuePropName="checked">
@@ -77,7 +94,7 @@ class BaseForm extends React.Component {
           提交
       </Button>
       </Form.Item>
-    </Form>
+    </Form >
   }
 }
 
