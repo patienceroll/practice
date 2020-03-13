@@ -3,11 +3,6 @@ import styles from './index.less';
 
 import { Layout, Menu, Form, Input, Button, Checkbox } from 'antd';
 import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
   UserOutlined,
   UploadOutlined,
   VideoCameraOutlined,
@@ -20,10 +15,10 @@ class BaseForm extends React.Component {
   render() {
     const layout = {
       labelCol: { span: 8 },
-      wrapperCol: { span: 16 },
+      wrapperCol: { span: 8 },
     };
     const tailLayout = {
-      wrapperCol: { offset: 8, span: 16 },
+      wrapperCol: { offset: 8, span: 8 },
     };
 
     const onFinish = (values: any) => {
@@ -106,11 +101,8 @@ class App extends React.Component {
       </div>
 
       <div className={styles.body}>
-
         <Layout style={{ height: "100%" }}>
-
           <Sider
-
             style={{
               overflow: 'auto',
               height: '100vh',
@@ -131,26 +123,6 @@ class App extends React.Component {
               <Menu.Item key="3">
                 <UploadOutlined />
                 <span className="nav-text">nav 3</span>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <BarChartOutlined />
-                <span className="nav-text">nav 4</span>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <CloudOutlined />
-                <span className="nav-text">nav 5</span>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <AppstoreOutlined />
-                <span className="nav-text">nav 6</span>
-              </Menu.Item>
-              <Menu.Item key="7">
-                <TeamOutlined />
-                <span className="nav-text">nav 7</span>
-              </Menu.Item>
-              <Menu.Item key="8">
-                <ShopOutlined />
-                <span className="nav-text">nav 8</span>
               </Menu.Item>
             </Menu>
           </Sider>
