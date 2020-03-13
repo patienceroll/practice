@@ -1,0 +1,10 @@
+.ql-container{
+    height: 300px;
+}
+
+#root{
+    height: 100%;
+}
+.ant-layout{
+    overflow: hidden;
+}
