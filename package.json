@@ -6,7 +6,7 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
-    "commit":"npx git-cz"
+    "commit": "npx git-cz"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -22,6 +22,7 @@
   "dependencies": {
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.7",
+    "antd": "^4.0.2",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
